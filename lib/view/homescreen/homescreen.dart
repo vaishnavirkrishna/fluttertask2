@@ -1,5 +1,5 @@
 import 'package:fluttask2/view/utils/constant.dart';
-import 'package:fluttask2/view/widgets/drawer.dart';
+
 import 'package:flutter/material.dart';
 
 class MyHome extends StatefulWidget {
@@ -8,64 +8,97 @@ class MyHome extends StatefulWidget {
 }
 
 class _MyHomeState extends State<MyHome> {
-  int _currentIndex = 0;
+  int? crindex;
+
+  Color myColor = Colors.black;
+  List<Color> labelColors = List.filled(4, Colors.white);
+  @override
+  void initState() {
+    super.initState();
+
+    labelColors = List<Color>.generate(4, (index) {
+      return index == 0 ? Colors.black : Colors.white;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final List<String> chipLabels = [
+    final List<String> Labels = [
       'Dresses',
       'Jackets',
       'Jeans',
       'Shoes',
     ];
-    final List<Color> chipColors = List<Color>.filled(4, Colors.white);
+
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    Color defaultColor = Colors.white;
+
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         actions: [
-          CircleAvatar(
-            radius: 20,
-            child: Image.network(
-              "https://pngimg.com/uploads/cowboy_hat/cowboy_hat_PNG85.png",
-              fit: BoxFit.cover,
+          Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: CircleAvatar(
+              child: Image.asset(
+                icons[0],
+                fit: BoxFit.cover,
+              ),
+              backgroundColor: Colors.black,
+            ),
+          ),
+          Spacer(),
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: CircleAvatar(
+              radius: 18,
+              child: Image.asset(
+                img[0],
+                fit: BoxFit.cover,
+              ),
             ),
           )
         ],
       ),
-      drawer: MyDrawer(),
       body: Column(
         children: [
           SizedBox(height: height * 0.02),
           Container(
             child: Padding(
-              padding: EdgeInsets.all(18.0),
+              padding: EdgeInsets.all(14.0),
               child: Row(
                 children: [
                   Expanded(
-                    child: Container(
-                      height: height * 0.05,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
                       child: TextField(
                         decoration: InputDecoration(
-                          labelText: "Search",
-                          prefixIcon: Icon(Icons.search),
-                          border: OutlineInputBorder(
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 243, 238, 238),
+                          labelText: "Search...",
+                          labelStyle: TextStyle(color: Colors.grey),
+                          prefixIcon: Image.asset(icons[2]),
+                          focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(width * 0.09),
                             ),
+                            borderSide: BorderSide(color: Colors.white),
                           ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(width * 0.09),
+                            ),
+                            borderSide: BorderSide(color: Colors.white),
+                          ),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 14),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(width: width * 0.07),
                   CircleAvatar(
-                    child: Icon(
-                      Icons.line_weight_outlined,
-                      color: Colors.white,
-                    ),
+                    radius: 21,
                     backgroundColor: Colors.black,
+                    child: Image.asset(icons[1]),
                   ),
                 ],
               ),
@@ -74,58 +107,84 @@ class _MyHomeState extends State<MyHome> {
           SizedBox(
             height: height * 0.01,
           ),
-          Wrap(
-            spacing: 8.0,
-            runSpacing: 8.0,
-            children: [
-              Container(
-                height: 80,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: chipLabels.length,
-                  itemBuilder: (context, index) {
-                    Color chipColor = chipColors[index];
-
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0,
-                        vertical: 8.0,
-                      ),
-                      child: GestureDetector(
-                        onTap: () {
-                          print("Chip tapped at index $index");
-                          setState(() {
-                            chipColors[index] =
-                                chipColors[index] == defaultColor
-                                    ? Colors.red
-                                    : defaultColor;
-                          });
-                        },
-                        child: Chip(
-                          label: Text(chipLabels[index]),
-                          backgroundColor: chipColor,
-                          labelStyle: TextStyle(color: Colors.black),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
+          Padding(
+            padding: const EdgeInsets.all(11.0),
+            child: Container(
+              height: 52,
+              width: width * 0.99,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: ListView.separated(
+                      separatorBuilder: (context, index) => SizedBox(),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: Labels.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 7.0,
+                            vertical: 10.0,
                           ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                          child: GestureDetector(
+                            onTap: () {
+                              print("Chip tapped at index $index");
+                              setState(() {
+                                for (int i = 0; i < labelColors.length; i++) {
+                                  labelColors[i] = Colors.white;
+                                }
+
+                                labelColors[index] = Colors.black;
+                              });
+                            },
+                            child: Container(
+                              // width: width * 0.155,
+                              width: width * 0.2,
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: Text(
+                                    Labels[index],
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: labelColors[index] == Colors.black
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 1,
+                                  color: labelColors[index] == Colors.black
+                                      ? Colors.transparent
+                                      : Color.fromARGB(255, 201, 199, 199),
+                                ),
+                                color: labelColors[index],
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-
-// ...
-
           Expanded(
             child: GridView.count(
               childAspectRatio: 20 / 33,
               crossAxisCount: 2,
+              mainAxisSpacing: 2,
               children: List.generate(4, (index) {
+                double horizontalPadding = 20 + 14;
+
                 return Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: EdgeInsets.only(
+                      left: horizontalPadding / 2,
+                      right: horizontalPadding / 2),
                   child: Column(
                     children: [
                       index.isEven
@@ -141,10 +200,12 @@ class _MyHomeState extends State<MyHome> {
                               flex: 3,
                               child: Container(
                                 decoration: const BoxDecoration(
-                                  color: Color.fromARGB(255, 197, 190, 190),
+                                  color: Color.fromARGB(255, 224, 217, 217),
                                   borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(20),
                                     topRight: Radius.circular(20),
+                                    bottomLeft: Radius.circular(20),
+                                    bottomRight: Radius.circular(20),
                                   ),
                                 ),
                                 child: Stack(
@@ -155,24 +216,28 @@ class _MyHomeState extends State<MyHome> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Padding(
-                                          padding: EdgeInsets.only(
-                                              right: 20, top: 20),
-                                          child: Image.network(
-                                            img[index],
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
+                                            padding: EdgeInsets.only(
+                                              top: 20,
+                                            ),
+                                            child: Image.asset(
+                                              imge[index],
+                                              fit: BoxFit.cover,
+                                            )),
                                       ],
                                     ),
                                     Positioned(
                                       top: 10,
-                                      right: 0,
+                                      right: 5,
                                       child: CircleAvatar(
                                         radius: 15,
-                                        backgroundColor: Colors.white,
+                                        backgroundColor: Colors.black,
                                         child: IconButton(
                                           iconSize: 15,
-                                          icon: Icon(Icons.favorite),
+                                          icon: Icon(
+                                            Icons.favorite,
+                                            color: const Color.fromARGB(
+                                                255, 223, 212, 212),
+                                          ),
                                           onPressed: () {},
                                         ),
                                       ),
@@ -189,13 +254,13 @@ class _MyHomeState extends State<MyHome> {
                                   children: [
                                     SizedBox(height: 3.0),
                                     Text(
-                                      "Roller Rabbit",
+                                      titles[index],
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     Text(
-                                      "Bubble elastic tshirt",
+                                      subtitles[index],
                                       style: TextStyle(
                                         fontWeight: FontWeight.w400,
                                       ),
@@ -209,7 +274,7 @@ class _MyHomeState extends State<MyHome> {
                                   ],
                                 ),
                                 decoration: const BoxDecoration(
-                                  color: Colors.white,
+                                  color: Colors.transparent,
                                   borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(20),
                                     bottomRight: Radius.circular(20),
@@ -225,33 +290,6 @@ class _MyHomeState extends State<MyHome> {
                 );
               }),
             ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: 'Cart',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notifications',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'person',
           ),
         ],
       ),

@@ -22,18 +22,18 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             title: Text('Item 1'),
             onTap: () {
-              // Handle item 1 tap
-              Navigator.pop(context); // Close the drawer
+      
+              Navigator.pop(context); 
             },
           ),
           ListTile(
             title: Text('Item 2'),
             onTap: () {
-              // Handle item 2 tap
-              Navigator.pop(context); // Close the drawer
+             
+              Navigator.pop(context); 
             },
           ),
-          // Add more list tiles for additional items
+        
         ],
       ),
     );
