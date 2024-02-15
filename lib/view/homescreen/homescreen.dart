@@ -41,7 +41,8 @@ class _MyHomeState extends State<MyHome> {
             padding: const EdgeInsets.only(left: 20),
             child: CircleAvatar(
               child: Image.asset(
-                icons[0],
+                // icons[0],
+                AppImages().icons[0],
                 fit: BoxFit.cover,
               ),
               backgroundColor: Colors.black,
@@ -53,7 +54,8 @@ class _MyHomeState extends State<MyHome> {
             child: CircleAvatar(
               radius: 18,
               child: Image.asset(
-                img[0],
+                //img[0],
+                AppImages().img[0],
                 fit: BoxFit.cover,
               ),
             ),
@@ -77,7 +79,9 @@ class _MyHomeState extends State<MyHome> {
                           fillColor: Color.fromARGB(255, 243, 238, 238),
                           labelText: "Search...",
                           labelStyle: TextStyle(color: Colors.grey),
-                          prefixIcon: Image.asset(icons[2]),
+                          prefixIcon: Image.asset(
+                              // icons[2]
+                              AppImages().icons[2]),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(width * 0.09),
@@ -98,7 +102,7 @@ class _MyHomeState extends State<MyHome> {
                   CircleAvatar(
                     radius: 21,
                     backgroundColor: Colors.black,
-                    child: Image.asset(icons[1]),
+                    child: Image.asset(AppImages().icons[1]),
                   ),
                 ],
               ),
@@ -220,7 +224,8 @@ class _MyHomeState extends State<MyHome> {
                                               top: 20,
                                             ),
                                             child: Image.asset(
-                                              imge[index],
+                                              //  imge[index],
+                                              AppImages().imge[index],
                                               fit: BoxFit.cover,
                                             )),
                                       ],
@@ -254,13 +259,15 @@ class _MyHomeState extends State<MyHome> {
                                   children: [
                                     SizedBox(height: 3.0),
                                     Text(
-                                      titles[index],
+                                      //titles[index],
+                                      AppImages().titles[index],
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     Text(
-                                      subtitles[index],
+                                      //  subtitles[index],
+                                      AppImages().subtitles[index],
                                       style: TextStyle(
                                         fontWeight: FontWeight.w400,
                                       ),

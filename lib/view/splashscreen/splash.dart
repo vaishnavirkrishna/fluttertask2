@@ -38,7 +38,10 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Container(
               height: 160,
               width: 130,
-              child: Image.asset(img[0]),
+              child: Image.asset(
+                //img[0]
+                AppImages().img[0],
+              ),
             ),
           )
         ],

@@ -1,5 +1,5 @@
+import 'package:fluttask2/utils/textfromwidget.dart';
 import 'package:fluttask2/view/bottomnav/nav.dart';
-import 'package:fluttask2/view/homescreen/homescreen.dart';
 import 'package:fluttask2/view/utils/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -20,56 +20,6 @@ class _MyWidgetState extends State<LoginScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
-  }
-
-  String? _validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter gmail';
-    } else if (!value.endsWith('@gmail.com')) {
-      return 'please enter valid gmail';
-    }
-    return null;
-  }
-
-  String? _validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter valid password';
-    } else if (value.length < 7) {
-      return 'at least enter 6 characters';
-    } else if (value.length > 13) {
-      return 'maximum character is 13';
-    }
-    return null;
-  }
-
-  void _submitForm() {
-    if (_formKey.currentState?.validate() ?? false) {
-      print('Login successful!');
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return FancyBottomBarPage();
-      }));
-    } else {
-      print('Form validation failed.');
-
-      if (_emailController.text.isEmpty) {
-        print('Email is required.');
-      } else if (!RegExp(r'^[a-zA-Z0-9]+@gmail\.com$')
-          .hasMatch(_emailController.text)) {
-        print('Please enter a valid gmail address.');
-      }
-
-      if (_passwordController.text.isEmpty) {
-        print('Password is required.');
-      } else if (_passwordController.text.length < 7) {
-        print('Password should be at least 6 characters.');
-      } else if (_passwordController.text.length > 13) {
-        print('Password should be at most 13 characters.');
-      }
-    }
-
-    _emailController.clear();
-    _passwordController.clear();
-    _formKey.currentState?.reset();
   }
 
   @override
@@ -94,10 +44,12 @@ class _MyWidgetState extends State<LoginScreen> {
             ),
             Center(
               child: Container(
-                height: screenHeight * 0.15,
-                width: screenWidth * 0.2,
-                child: img.isNotEmpty ? Image.asset(img[0]) : SizedBox.shrink(),
-              ),
+                  height: screenHeight * 0.15,
+                  width: screenWidth * 0.2,
+                  //  child: img.isNotEmpty ? Image.asset(img[0]) : SizedBox.shrink(),
+                  child: AppImages().img.isNotEmpty
+                      ? Image.asset(AppImages().img[0])
+                      : SizedBox.shrink()),
             ),
             Expanded(
               child: Padding(
@@ -145,40 +97,16 @@ class _MyWidgetState extends State<LoginScreen> {
                                           ),
                                         ],
                                       ),
-                                      child: TextFormField(
-                                        style: TextStyle(fontSize: 14),
+                                      child: buildTextField(
+                                        validator: validateEmail,
                                         controller: _emailController,
-                                        decoration: InputDecoration(
-                                          labelText: 'Email',
-                                          hintText: "test@gmail.com",
-                                          labelStyle: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          enabledBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.transparent),
-                                          ),
-                                          focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.transparent),
-                                          ),
-                                          errorBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                width: 2, color: Colors.red),
-                                          ),
-                                          focusedErrorBorder:
-                                              UnderlineInputBorder(
-                                            borderSide:
-                                                BorderSide(color: Colors.red),
-                                          ),
-                                          errorStyle: TextStyle(
-                                            color: Colors.red,
-                                          ),
-                                        ),
-                                        validator: _validateEmail,
+                                        isVisible: isVisible,
+                                        toggleVisibility: (visible) {
+                                          setState(() {
+                                            isVisible = visible;
+                                          });
+                                        },
+                                        type: TextFieldType.Email,
                                       ),
                                     ),
                                   ),
@@ -200,47 +128,16 @@ class _MyWidgetState extends State<LoginScreen> {
                                           ),
                                         ],
                                       ),
-                                      child: TextFormField(
+                                      child: buildTextField(
                                         controller: _passwordController,
-                                        style: TextStyle(
-                                            fontSize: isVisible ? 13.0 : 10.0),
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          labelText: 'Password',
-                                          hintText: "......",
-                                          labelStyle: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                          border: UnderlineInputBorder(
-                                            borderSide: BorderSide.none,
-                                          ),
-                                          errorBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide.none,
-                                          ),
-                                          focusedErrorBorder:
-                                              UnderlineInputBorder(
-                                            borderSide:
-                                                BorderSide(color: Colors.red),
-                                          ),
-                                          errorStyle: TextStyle(
-                                            color: Colors.red,
-                                          ),
-                                          suffixIcon: InkWell(
-                                            onTap: () => setState(() {
-                                              isVisible = !isVisible;
-                                            }),
-                                            child: Icon(
-                                              isVisible
-                                                  ? Icons.visibility_off
-                                                  : Icons.visibility,
-                                              color: Color.fromARGB(
-                                                  255, 186, 182, 182),
-                                            ),
-                                          ),
-                                        ),
-                                        obscureText: isVisible,
-                                        validator: _validatePassword,
+                                        isVisible: isVisible,
+                                        toggleVisibility: (visible) {
+                                          setState(() {
+                                            isVisible = visible;
+                                          });
+                                        },
+                                        validator: validatePassword,
+                                        type: TextFieldType.Password,
                                       ),
                                     )),
                                 SizedBox(height: screenHeight * 0.1),
@@ -291,5 +188,35 @@ class _MyWidgetState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void _submitForm() {
+    if (_formKey.currentState?.validate() ?? false) {
+      print('Login successful!');
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return FancyBottomBarPage();
+      }));
+    } else {
+      print('Form validation failed.');
+
+      if (_emailController.text.isEmpty) {
+        print('Email is required.');
+      } else if (!RegExp(r'^[a-zA-Z0-9]+@gmail\.com$')
+          .hasMatch(_emailController.text)) {
+        print('Please enter a valid gmail address.');
+      }
+
+      if (_passwordController.text.isEmpty) {
+        print('Password is required.');
+      } else if (_passwordController.text.length < 7) {
+        print('Password should be at least 6 characters.');
+      } else if (_passwordController.text.length > 13) {
+        print('Password should be at most 13 characters.');
+      }
+    }
+
+    _emailController.clear();
+    _passwordController.clear();
+    _formKey.currentState?.reset();
   }
 }

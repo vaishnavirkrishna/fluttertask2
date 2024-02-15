@@ -1,6 +1,3 @@
-import 'package:fluttask2/view/accountspage/account.dart';
-import 'package:fluttask2/view/bottomnav/nav.dart';
-import 'package:fluttask2/view/cartpage/cartscreen.dart';
 import 'package:flutter/material.dart';
 
 class SavedPage extends StatefulWidget {

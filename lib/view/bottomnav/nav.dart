@@ -87,7 +87,9 @@ class FancyBottomNavigation extends StatelessWidget {
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(60), topRight: Radius.circular(60)),
         color: Theme.of(context).bottomAppBarTheme.color,
-        boxShadow: const [BoxShadow(color: Colors.white, blurRadius: 2)],
+        boxShadow: const [
+          BoxShadow(color: Colors.white, blurRadius: 2, spreadRadius: 7)
+        ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
