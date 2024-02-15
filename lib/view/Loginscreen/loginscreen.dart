@@ -47,9 +47,9 @@ class _MyWidgetState extends State<LoginScreen> {
                   height: screenHeight * 0.15,
                   width: screenWidth * 0.2,
                   //  child: img.isNotEmpty ? Image.asset(img[0]) : SizedBox.shrink(),
-                  child: AppImages().img.isNotEmpty
-                      ? Image.asset(AppImages().img[0])
-                      : SizedBox.shrink()),
+                  child: Image.asset(AppImages.logo)
+                  // : SizedBox.shrink()
+                  ),
             ),
             Expanded(
               child: Padding(
