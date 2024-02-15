@@ -18,6 +18,18 @@ class _MyHomeState extends State<MyHome> {
     AppImages.hoodie,
     AppImages.coat
   ];
+  List<String> dressTitles = [
+    AppStrings.a,
+    AppStrings.b,
+    AppStrings.c,
+    AppStrings.d
+  ];
+  List<String> dressSubtitles = [
+    AppStrings.e,
+    AppStrings.f,
+    AppStrings.g,
+    AppStrings.h
+  ];
   @override
   void initState() {
     super.initState();
@@ -266,14 +278,14 @@ class _MyHomeState extends State<MyHome> {
                                     SizedBox(height: 3.0),
                                     Text(
                                       //titles[index],
-                                      titles[index],
+                                      dressTitles[index],
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     Text(
                                       //  subtitles[index],
-                                      subtitles[index],
+                                      dressSubtitles[index],
                                       style: TextStyle(
                                         fontWeight: FontWeight.w400,
                                       ),

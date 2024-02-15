@@ -10,15 +10,13 @@ class AppImages {
   static const homeIcon = 'assets/images/ic_home.png';
 }
 
-List<String> titles = [
-  "Roller Rabit",
-  "Endless rose",
-  "Theory",
-  "Highlander",
-];
-List<String> subtitles = [
-  "Vodo Odelle Dress",
-  "Bubble Elastic Tshirt",
-  "Irregular Elastic T-shirt",
-  "Stripped Shirt",
-];
+class AppStrings {
+  static const a = "Roller Rabit";
+  static const b = "Endless rose";
+  static const c = "Theory";
+  static const d = "Highlander";
+  static const e = "Vodo Odelle Dress";
+  static const f = "Bubble Elastic Tshirt";
+  static const g = "Irregular Elastic T-shirt";
+  static const h = "Stripped Shirt";
+}
