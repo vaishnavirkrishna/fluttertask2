@@ -126,7 +126,8 @@ class _SliverHomeState extends State<SliverHome> {
                   filled: true,
                   fillColor: Color.fromARGB(255, 243, 238, 238),
                   labelText: "Search...",
-                  labelStyle: TextStyle(color: Colors.grey),
+                  labelStyle: TextStyle(
+                      color: Colors.grey, fontFamily: Constants.mainFont),
                   prefixIcon: Image.asset(AppImages.searchIcon),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
@@ -201,6 +202,7 @@ class _SliverHomeState extends State<SliverHome> {
                             child: Text(
                               Labels[index],
                               style: TextStyle(
+                                fontFamily: Constants.mainFont,
                                 fontWeight: FontWeight.bold,
                                 color: labelColors[index] == Colors.black
                                     ? Colors.white
@@ -332,18 +334,21 @@ class _SliverHomeState extends State<SliverHome> {
                             Text(
                               dressTitles[index],
                               style: TextStyle(
+                                fontFamily: Constants.mainFont,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
                               dressSubtitles[index],
                               style: TextStyle(
+                                fontFamily: Constants.mainFont,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
                             Text(
                               "\$${180.9}",
                               style: TextStyle(
+                                fontFamily: Constants.mainFont,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

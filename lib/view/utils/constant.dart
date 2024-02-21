@@ -20,3 +20,7 @@ class AppStrings {
   static const g = "Irregular Elastic T-shirt";
   static const h = "Stripped Shirt";
 }
+
+class Constants {
+  static String mainFont = 'Anta';
+}

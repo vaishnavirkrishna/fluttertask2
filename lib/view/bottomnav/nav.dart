@@ -89,13 +89,13 @@ class FancyBottomNavigation extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 80,
-      padding: const EdgeInsets.only(left: 8, right: 0, top: 6, bottom: 6),
+      padding: const EdgeInsets.only(left: 8, right: 2, top: 6, bottom: 6),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(60), topRight: Radius.circular(60)),
+            topLeft: Radius.circular(70), topRight: Radius.circular(70)),
         color: Theme.of(context).bottomAppBarTheme.color,
         boxShadow: const [
-          BoxShadow(color: Colors.white, blurRadius: 2, spreadRadius: 7)
+          BoxShadow(color: Colors.white, blurRadius: 6, spreadRadius: 0)
         ],
       ),
       child: Row(
@@ -117,13 +117,13 @@ class FancyBottomNavigation extends StatelessWidget {
     return AnimatedContainer(
       alignment: Alignment.bottomLeft,
       width: isSelected ? 101 : 75,
-      height: 50,
+      height: 40,
       duration: const Duration(milliseconds: 250),
       padding: EdgeInsets.only(right: 1, bottom: 3),
       decoration: !isSelected
           ? null
           : BoxDecoration(
-              color: Colors.white,
+              color: Colors.grey,
               borderRadius: const BorderRadius.all(Radius.circular(50)),
             ),
       child: Row(
@@ -132,7 +132,7 @@ class FancyBottomNavigation extends StatelessWidget {
         children: <Widget>[
           Container(
             alignment: Alignment.center,
-            height: 50,
+            height: 40,
             width: 40,
             decoration: isSelected
                 ? BoxDecoration(shape: BoxShape.circle, color: Colors.black)
@@ -141,7 +141,7 @@ class FancyBottomNavigation extends StatelessWidget {
             child: IconTheme(
               data: IconThemeData(
                 size: 27,
-                color: isSelected ? Colors.grey : Colors.black,
+                color: isSelected ? Colors.white70 : Colors.black,
               ),
               child: item.icon,
             ),
