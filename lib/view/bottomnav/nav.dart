@@ -1,6 +1,7 @@
 import 'package:fluttask2/view/accountspage/account.dart';
 import 'package:fluttask2/view/cartpage/cartscreen.dart';
 import 'package:fluttask2/view/homescreen/homescreen.dart';
+import 'package:fluttask2/view/homescreen/sliverhome.dart';
 import 'package:fluttask2/view/savedpage/savedscreen.dart';
 import 'package:flutter/material.dart';
 
@@ -44,6 +45,10 @@ class _FancyBottomBarPageState extends State<FancyBottomBarPage> {
             icon: Icon(Icons.person),
             title: Text("Account"),
           ),
+          FancyBottomNavigationItem(
+            icon: Icon(Icons.add_alert_rounded),
+            title: Text("sliver"),
+          ),
         ],
       ),
     );
@@ -59,6 +64,8 @@ class _FancyBottomBarPageState extends State<FancyBottomBarPage> {
         return SavedPage();
       case 3:
         return AccountPage();
+      case 4:
+        return SliverHome();
       default:
         return Container();
     }

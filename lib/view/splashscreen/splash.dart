@@ -1,4 +1,5 @@
 import 'package:fluttask2/view/Loginscreen/loginscreen.dart';
+import 'package:fluttask2/view/homescreen/sliverhome.dart';
 import 'package:fluttask2/view/utils/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),
+        MaterialPageRoute(builder: (context) => SliverHome()),
       );
     });
     Widget build(BuildContext context) {
