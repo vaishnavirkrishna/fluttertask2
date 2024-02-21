@@ -89,7 +89,7 @@ class FancyBottomNavigation extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 80,
-      padding: const EdgeInsets.only(left: 8, right: 8, top: 6, bottom: 6),
+      padding: const EdgeInsets.only(left: 8, right: 0, top: 6, bottom: 6),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(60), topRight: Radius.circular(60)),

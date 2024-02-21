@@ -1,5 +1,6 @@
 import 'package:fluttask2/view/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 class SliverHome extends StatefulWidget {
   @override
@@ -29,7 +30,7 @@ class _SliverHomeState extends State<SliverHome> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.white,
             actions: [
               Padding(
                 padding: const EdgeInsets.only(left: 20),
@@ -58,16 +59,37 @@ class _SliverHomeState extends State<SliverHome> {
           ),
           SliverPersistentHeader(
             pinned: true,
-            delegate: _SliverAppBarDelegate(
-              child: Column(
-                children: [
-                  SizedBox(height: height * 0.02),
-                  searchWidget(),
-                  SizedBox(
-                    height: height * 0.01,
-                  ),
-                  categoryList(),
-                ],
+            delegate: SliverAppBarDelegate(
+              maxHeight: 115,
+              minHeight: 70,
+              child: Container(
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    SizedBox(height: height * 0.02),
+                    searchWidget(),
+                    SizedBox(
+                      height: height * 0.01,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            floating: true,
+          ),
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: SliverAppBarDelegate(
+              maxHeight: 100,
+              minHeight: 60,
+              child: Container(
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    SizedBox(height: height * 0.02),
+                    categoryList(),
+                  ],
+                ),
               ),
             ),
             floating: true,
@@ -347,17 +369,19 @@ class _SliverHomeState extends State<SliverHome> {
   }
 }
 
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  SliverAppBarDelegate({
+    required this.minHeight,
+    required this.maxHeight,
+    required this.child,
+  });
+  final double minHeight;
+  final double maxHeight;
   final Widget child;
-
-  _SliverAppBarDelegate({required this.child});
-
   @override
-  double get minExtent => 0;
-
+  double get minExtent => minHeight;
   @override
-  double get maxExtent => 210;
-
+  double get maxExtent => math.max(maxHeight, minHeight);
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
@@ -365,7 +389,9 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    return false;
+  bool shouldRebuild(SliverAppBarDelegate oldDelegate) {
+    return maxHeight != oldDelegate.maxHeight ||
+        minHeight != oldDelegate.minHeight ||
+        child != oldDelegate.child;
   }
 }
