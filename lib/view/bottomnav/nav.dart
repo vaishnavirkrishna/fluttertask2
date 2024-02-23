@@ -45,10 +45,6 @@ class _FancyBottomBarPageState extends State<FancyBottomBarPage> {
             icon: Icon(Icons.person),
             title: Text("Account"),
           ),
-          FancyBottomNavigationItem(
-            icon: Icon(Icons.add_alert_rounded),
-            title: Text("sliver"),
-          ),
         ],
       ),
     );
@@ -59,13 +55,12 @@ class _FancyBottomBarPageState extends State<FancyBottomBarPage> {
       case 0:
         return MyHome();
       case 1:
-        return CartPage();
+        return SliverHome();
       case 2:
         return SavedPage();
       case 3:
         return AccountPage();
-      case 4:
-        return SliverHome();
+
       default:
         return Container();
     }
@@ -117,13 +112,13 @@ class FancyBottomNavigation extends StatelessWidget {
     return AnimatedContainer(
       alignment: Alignment.bottomLeft,
       width: isSelected ? 101 : 75,
-      height: 40,
+      height: 35,
       duration: const Duration(milliseconds: 250),
       padding: EdgeInsets.only(right: 1, bottom: 3),
       decoration: !isSelected
           ? null
           : BoxDecoration(
-              color: Colors.grey,
+              color: Color.fromARGB(255, 236, 233, 233),
               borderRadius: const BorderRadius.all(Radius.circular(50)),
             ),
       child: Row(
@@ -132,8 +127,8 @@ class FancyBottomNavigation extends StatelessWidget {
         children: <Widget>[
           Container(
             alignment: Alignment.center,
-            height: 40,
-            width: 40,
+            height: 38,
+            width: 35,
             decoration: isSelected
                 ? BoxDecoration(shape: BoxShape.circle, color: Colors.black)
                 : BoxDecoration(
@@ -141,7 +136,7 @@ class FancyBottomNavigation extends StatelessWidget {
             child: IconTheme(
               data: IconThemeData(
                 size: 27,
-                color: isSelected ? Colors.white70 : Colors.black,
+                color: isSelected ? Colors.white : Colors.black,
               ),
               child: item.icon,
             ),

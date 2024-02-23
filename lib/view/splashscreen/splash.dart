@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:fluttask2/view/Loginscreen/loginscreen.dart';
 import 'package:fluttask2/view/homescreen/sliverhome.dart';
 import 'package:fluttask2/view/utils/constant.dart';
-import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -10,9 +10,23 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _animation;
+
+  @override
   void initState() {
     super.initState();
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 5),
+    );
+
+    _animation = Tween<double>(begin: 0, end: 3).animate(_animationController);
+
+    _animationController.forward();
 
     Future.delayed(Duration(seconds: 3), () {
       Navigator.pushReplacement(
@@ -20,11 +34,12 @@ class _SplashScreenState extends State<SplashScreen> {
         MaterialPageRoute(builder: (context) => LoginScreen()),
       );
     });
-    Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(),
-      );
-    }
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -35,15 +50,16 @@ class _SplashScreenState extends State<SplashScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(
-            child: Container(
-              height: 160,
-              width: 130,
-              child: Image.asset(
-                  //img[0]
-                  AppImages.logo),
+          FadeTransition(
+            opacity: _animation,
+            child: Center(
+              child: Container(
+                height: 160,
+                width: 130,
+                child: Image.asset(AppImages.logo),
+              ),
             ),
-          )
+          ),
         ],
       ),
     );
